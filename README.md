@@ -1,3 +1,13 @@
+### Name: Sameer Choudhary
+
+### Phone: 8114563560
+
+### Email: sameerme@iitk.ac.in
+
+
+
+
+
 ## How to run
 
 * First create a **.env** file in the root folder with following contents
