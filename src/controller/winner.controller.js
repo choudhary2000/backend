@@ -1,3 +1,4 @@
+const { get_winners_from_db } = require("../db/winners.db");
 const { get_first_day } = require("../helper/getstartdayforwinner");
 const { isIntegerOrNull } = require("../validations/isInteger");
 const { isValidDuration } = require("../validations/isValidDuration")
@@ -19,9 +20,10 @@ module.exports.get_winner = async function(req, res, next) {
         const offset = (page - 1)*per_page;
         // getting first day of week , month or year for example start date of week 22/11/2021 is 15/11/2021 similay for month and year
         const start_date = get_first_day(by);
-
-
-    } catch (error) {
         
+        const data = await get_winners_from_db(start_date, offset, page, per_page)
+        return res.status(200).send(data)
+    } catch (error) {
+        next(error)
     }
 }

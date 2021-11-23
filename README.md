@@ -129,9 +129,40 @@ GET /winner
 GET /winner?by=
 	here by takes value in "week", "month", "year", "all"
 	return respective winners
+	
+return by some what look like
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "grofers at IITK",
+            "status": "DECLARED",
+            "type": "DAILY",
+            "winners": [
+                {
+                    "rank": 1,
+                    "ticket": "0m8",
+                    "email": "sameerme1@iitk.ac.in"
+                },
+                {
+                    "rank": 2,
+                    "ticket": "1m8",
+                    "email": "sameerme2@iitk.ac.in"
+                },
+                {
+                    "rank": 3,
+                    "ticket": "U9b",
+                    "email": "sameerme@iitk.ac.in"
+                }
+            ]
+        }
+    ],
+    "offset": 0,
+    "page_no": 1,
+    "per_page": 10
+}
+	
 ```
-
-
 
 
 
