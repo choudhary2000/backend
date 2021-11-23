@@ -20,7 +20,7 @@ module.exports.get_events_by_date = async function (op, date, type) {
 module.exports.update_events_status = async function(event_id, status) {
     return await db('events')
     .update('status', status)
-    .where('event_id', event_id)
+    .where('id', event_id)
     .then(res => "done")
 }
 

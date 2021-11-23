@@ -10,7 +10,7 @@
   DB_USER="sameer"
   DB_PASSWORD="sameer@1234"
   DATABASE="grofers"
-  CRON_INTERVAL="30 20 * * *"
+  CRON_INTERVAL="00 20 * * *"
   ```
 
   1. Replace DB_URL, DB_PORT, DB_USER, DB_PASSWORD, DATABASE values with your postgres setup
@@ -54,6 +54,86 @@
       }
     ]
   ```
+
+
+
+### Following API expose
+
+```bas
+1. GET /events/upcoming_event
+  Api: return all future events
+  Implementation can found in event.route.js file in route directory
+  
+
+2. GET /events/upcoming_event?event_type=<value>
+	return future events of specific type
+	here event_type can takes value in ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY', 'BIG']
+	
+	Implementation can found in event.route.js file in route directory
+```
+
+
+
+create-event
+
+```bas
+1. POST event/create-event
+	Allow admin to create an event
+	body: {
+		event_name: "",
+		event_type: ""//['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY', 'BIG'],
+		event_date: ""//annocement of event date,
+		event_winners: ""//Total winners in the event
+		event_limit: ""//Maximum participants take part in the event,
+		prize: [{
+		rank: 1,
+		prize: "Iphone"
+		}]
+	}
+```
+
+Tickets
+
+```bash
+GET /raffle-ticket/tickets?event_id=1
+	return Default All Sold and unsold
+	which we can filter by state parameter
+GET /raffle-ticket/tickets?event_id=1&state=NOT_SOLD
+	return all unsold tickets for event 1
+GET /raffle-ticket/tickets?event_id=1&state=SOLD
+	return all sold tickets for event 1
+```
+
+
+
+Buy-tickets
+
+```bash
+POST /raffle-ticket/buy-ticket
+	body: {
+		email: 'sameerme@iitk.ac.in',
+		event_id: '1',
+		ticket_no: '0c8'
+	}
+	Allows a user to buy a ticket for an event one times 
+```
+
+
+
+Winners
+
+```
+GET /winner
+	Return winners of a week
+	
+GET /winner?by=
+	here by takes value in "week", "month", "year", "all"
+	return respective winners
+```
+
+
+
+
 
 ## Following thing I consider in the assignment
 

@@ -5,7 +5,7 @@ module.exports.get_events_which_schedule = async function() {
     
     const curr_date = get_current_datetime();
 
-    return await db.select(['id as event_id', 'status', 'event_date'])
+    return await db.select(['id as event_id', 'status', 'event_date', 'winners'])
     .from('events').where('event_date', '<=', curr_date)
     .andWhere('status', 'NOT_DECLARED');
 }
@@ -19,7 +19,7 @@ module.exports.get_participants_of_a_event = async function(event_id) {
 module.exports.insert_winners_into_table = async function(winners) {
     return await db('winners').insert(winners)
     .then(res => "ok")
-    .catck(err => {
+    .catch(err => {
         throw err;
     })
 }

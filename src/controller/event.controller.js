@@ -37,7 +37,7 @@ module.exports.create_event = async function (req, res, next) {
         const event_date = await isDate(req.body.event_date);
         const event_limit = await isInteger(req.body.event_limit);
         const event_winners = await isInteger(req.body.event_winners);
-        // const ticket_length = await isInteger(req.body.ticket_length);
+
         const event =  {};
         event.name = event_name;
         event.type = event_type;

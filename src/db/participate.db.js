@@ -1,8 +1,8 @@
 const db = require("./db");
 
-module.exports.create_a_participate_for_the_event = async function(user_id, event_id, ticket_no) {
+module.exports.create_a_participate_for_the_event = async function(email, event_id, ticket_no) {
     const participate = {
-        "user_id": user_id,
+        "email": email,
         "event_id": event_id,
         "ticket": ticket_no
     }
