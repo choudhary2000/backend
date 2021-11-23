@@ -13,7 +13,7 @@ module.exports.get_winners_from_db = async function(start_date, offset, page, pe
         .on('p.ticket', '=', 'w.ticket')
     })
     .where('e.event_date','>=',start_date)
-    .where('e.status', 'DECLARED')
+    .andWhere('e.status', 'DECLARED')
     .groupBy('e.id')
     .offset(offset)
     .limit(per_page)
@@ -25,5 +25,25 @@ module.exports.get_winners_from_db = async function(start_date, offset, page, pe
         pagin.per_page = per_page;
         return pagin
     })
+    .catch(err => err)
+}
+
+
+module.exports.get_winners_for_an_event_from_db = async function(event_id) {
+    return await db('events as e').select(['e.id', 'e.name', 'e.status', 'e.type',
+    db.raw(`JSON_AGG(JSON_BUILD_OBJECT(
+        'rank', w.rank,
+        'ticket', w.ticket,
+        'email', p.email
+    )) as winners`)])
+    .leftJoin('winners as w', 'e.id', 'w.event_id')
+    .leftJoin('participations as p', function () {
+        this.on('p.event_id', '=', 'w.event_id')
+        .on('p.ticket', '=', 'w.ticket')
+    })
+    .where('e.id', event_id)
+    .andWhere('e.status', 'DECLARED')
+    .groupBy('e.id')
+    .then(res => res)
     .catch(err => err)
 }

@@ -10,6 +10,8 @@ const { isString } = require('../validations/isString');
 const { isValidEventStatus } = require('../validations/isValidEventStatus');
 const { get_date } = require('../helper/getcurrentdate');
 const { isValidEventType } = require('../validations/isValidEventType');
+const { isValidRewads } = require('../validations/isValidRewards');
+const { insert_rewards_of_an_event } = require('../db/rewards.db');
 
 module.exports.get_future_events = async function (req, res, next) {
     try {
@@ -37,7 +39,8 @@ module.exports.create_event = async function (req, res, next) {
         const event_date = await isDate(req.body.event_date);
         const event_limit = await isInteger(req.body.event_limit);
         const event_winners = await isInteger(req.body.event_winners);
-
+        let rewards = await isValidRewads(req.body.rewards, event_winners);
+        
         const event =  {};
         event.name = event_name;
         event.type = event_type;
@@ -51,6 +54,8 @@ module.exports.create_event = async function (req, res, next) {
         const tickets = generate_ticket_for_an_event(event_limit, event_id);
         //inserting tickets into the tables
         await insert_tickets_of_an_event(tickets);
+        await insert_rewards_of_an_event(rewards, event_id)
+
         res.status(200).send("events successfully created!");
     } catch (error) {
         next(error);

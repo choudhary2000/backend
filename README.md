@@ -85,9 +85,10 @@ create-event
 		event_date: ""//annocement of event date,
 		event_winners: ""//Total winners in the event
 		event_limit: ""//Maximum participants take part in the event,
-		prize: [{
-		rank: 1,
-		prize: "Iphone"
+		prize: [
+		{
+			rank: 1,
+			prize: "Iphone"
 		}]
 	}
 ```
@@ -115,7 +116,7 @@ POST /raffle-ticket/buy-ticket
 		event_id: '1',
 		ticket_no: '0c8'
 	}
-	Allows a user to buy a ticket for an event one times 
+Allows a user to buy a ticket for an event one time
 ```
 
 
@@ -164,6 +165,39 @@ return by some what look like
 	
 ```
 
+get_winner_by_id 
+
+```ba
+GET /winner/by-event_id?event_id=?
+return winners of declared event
+Output:
+[
+    {
+        "id": 1,
+        "name": "grofers at IITK",
+        "status": "DECLARED",
+        "type": "DAILY",
+        "winners": [
+            {
+                "rank": 1,
+                "ticket": "0m8",
+                "email": "sameerme1@iitk.ac.in"
+            },
+            {
+                "rank": 2,
+                "ticket": "1m8",
+                "email": "sameerme2@iitk.ac.in"
+            },
+            {
+                "rank": 3,
+                "ticket": "U9b",
+                "email": "sameerme@iitk.ac.in"
+            }
+        ]
+    }
+]
+```
+
 
 
 ## Following thing I consider in the assignment
@@ -172,10 +206,6 @@ return by some what look like
 2. An event has fixed number of tickets and winners
 3. All user already present in the databases
 4. In tickets I'm using Alphanumeric charaset [a-z A-Z 0-9]
-
-
-
-
 
 ## About assignment
 
