@@ -49,7 +49,7 @@ Above implementation can be found in: ***src/helper/generateticketsforevent.js**
 
 
 
-![ER diagram](/home/sameer/Code/grofers/backend/resource/overview.png)
+![ER diagram](resource/overview.png)
 
 
 
