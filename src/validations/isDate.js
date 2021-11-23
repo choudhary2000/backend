@@ -6,7 +6,8 @@ module.exports.isDate = async function (date) {
         const schema = Joi.object({
             date: Joi.date().min(get_date())
         })
-        return await schema.validateAsync({date: date})
+        await schema.validateAsync({date: date});
+        return date;
     } catch (error) {
         throw error;
     }

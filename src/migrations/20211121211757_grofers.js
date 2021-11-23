@@ -10,9 +10,8 @@ exports.up = function(knex) {
         table.timestamp('event_date').default(knex.fn.now()).index()
     })
     .createTable('users', table => {
-        table.increments('user_id').primary().index(),
-        table.text('email').notNullable().unique();
-        // table.text('password').notNullable()
+        table.text('email').primary().notNullable(),
+        table.enu('role', ['USER', 'ADMIN']).notNullable().default('USER')
     })
     .createTable('tickets', table => {
         table.integer('event_id').notNullable().references('id').inTable('events'),
@@ -27,10 +26,10 @@ exports.up = function(knex) {
     })
     .createTable('participations', (table) => {
         table.integer('event_id').index(),
-        table.integer('user_id').index(),
+        table.text('email').index(),
         table.text('ticket').notNullable(),
-        table.unique(["event_id", "user_id"]),
-        table.foreign('user_id').references('users.user_id'),
+        table.unique(["event_id", "email"]),
+        table.foreign('email').references('users.email'),
         table.foreign('event_id').references('events.id')
     })
     .createTable('winners', (table) => {

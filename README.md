@@ -1,3 +1,60 @@
+## How to run
+
+* First create a **.env** file in the root folder with following contents
+
+  ```javascript
+  NODE_ENV="development"
+  PORT=3001
+  DB_URL=127.0.0.1
+  DB_PORT=5432
+  DB_USER="sameer"
+  DB_PASSWORD="sameer@1234"
+  DATABASE="grofers"
+  CRON_INTERVAL="30 20 * * *"
+  ```
+
+  1. Replace DB_URL, DB_PORT, DB_USER, DB_PASSWORD, DATABASE values with your postgres setup
+
+  **Then follow following commands**
+
+  ```bash
+  npm install
+  npm run migrate
+  npm run seed
+  npm start
+  ```
+
+* Following users are present in DB(**npm run seed** is used to insert this user into users table)
+
+  ```bash
+  USER = [
+      {
+        "email": "sameerme@iitk.ac.in",
+        "role": "ADMIN"
+      },
+      {
+        "email": "sameerme1@iitk.ac.in",
+        "role": "USER"
+      },
+      {
+        "email": "sameerme2@iitk.ac.in",
+        "role": "USER"
+      },
+      {
+        "email": "grofers@iitk.ac.in",
+        "role": "USER"
+      },
+      {
+        "email": "grofers1@iitk.ac.in",
+        "role": "USER"
+      },
+      {
+        "email": "grofers2@iitk.ac.in",
+        "role": "ADMIN"
+      }
+    ]
+  ```
+
 ## Following thing I consider in the assignment
 
 1. Result always declared at fixed time. for example(8:00 pm)

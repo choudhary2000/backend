@@ -7,8 +7,9 @@ const { insert_tickets_of_an_event } = require('../db/tickets.db');
 const { isIntegerOrNull, isInteger } = require('../validations/isInteger');
 const { isDate } = require('../validations/isDate');
 const { isString } = require('../validations/isString');
-const { isValidEventType, isValidEventStatus } = require('../validations/isValidEventStatus');
+const { isValidEventStatus } = require('../validations/isValidEventStatus');
 const { get_date } = require('../helper/getcurrentdate');
+const { isValidEventType } = require('../validations/isValidEventType');
 
 module.exports.get_future_events = async function (req, res, next) {
     try {
@@ -37,7 +38,6 @@ module.exports.create_event = async function (req, res, next) {
         const event_limit = await isInteger(req.body.event_limit);
         const event_winners = await isInteger(req.body.event_winners);
         // const ticket_length = await isInteger(req.body.ticket_length);
-
         const event =  {};
         event.name = event_name;
         event.type = event_type;
@@ -45,10 +45,8 @@ module.exports.create_event = async function (req, res, next) {
         event.winners = event_winners;
         event.event_date = event_date;
         event.limits = event_limit
-
         // inserting events meta data into the events table
         const [ event_id ] = await insert_event(event);
-
         //creating tickets for the events
         const tickets = generate_ticket_for_an_event(event_limit, event_id);
         //inserting tickets into the tables

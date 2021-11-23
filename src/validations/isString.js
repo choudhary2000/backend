@@ -4,7 +4,8 @@ module.exports.isString = async function(data) {
         const schema = Joi.object({
             data: Joi.string().required()
         })
-        return await schema.validateAsync({data: data});   
+        await schema.validateAsync({data: data});
+        return data;  
     } catch (error) {
         throw error;
     }
