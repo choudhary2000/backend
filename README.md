@@ -24,8 +24,7 @@
 ### How I created raffle tickets for an event
 
 	1. Lets us assume L be the limits of an event(i.e. that many ticket will be sells for an event)
-	1. Therefore minimum characters in a ticket should be **C=** **ceil(log(L)/log(62))** (here 62 be the charaset)
-
+	2. Therefore minimum characters in a ticket should be **C=** **ceil(log(L)/log(62))** (here 62 be the charaset)
 ​	3. Then, I will generate L different tickets of length(**C**) using randomstring package
 
 Above implementation can be found in: ***src/helper/generateticketsforevent.js***
